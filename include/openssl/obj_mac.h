@@ -5009,6 +5009,10 @@
 #define LN_sshkdf               "sshkdf"
 #define NID_sshkdf              1205
 
+#define SN_kbkdf                "KBKDF"
+#define LN_kbkdf                "kbkdf"
+#define NID_kbkdf               1206
+
 #define SN_krb5kdf              "KRB5KDF"
 #define LN_krb5kdf              "krb5kdf"
 #define NID_krb5kdf             1207
