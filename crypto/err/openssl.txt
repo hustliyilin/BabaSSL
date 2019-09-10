@@ -824,6 +824,11 @@ EVP_F_S390X_AES_GCM_CTRL:201:s390x_aes_gcm_ctrl
 EVP_F_SCRYPT_ALG:228:scrypt_alg
 EVP_F_UPDATE:173:update
 KDF_F_HKDF_EXTRACT:112:HKDF_Extract
+KDF_F_KBKDF_CTRL:134:kbkdf_ctrl
+KDF_F_KBKDF_CTRL_STR:135:kbkdf_ctrl_str
+KDF_F_KBKDF_DERIVE:136:kbkdf_derive
+KDF_F_KBKDF_NEW:137:kbkdf_new
+KDF_F_KDF_CIPHER2CTRL:138:kdf_cipher2ctrl
 KDF_F_KDF_HKDF_DERIVE:113:kdf_hkdf_derive
 KDF_F_KDF_HKDF_NEW:114:kdf_hkdf_new
 KDF_F_KDF_HKDF_SIZE:115:kdf_hkdf_size

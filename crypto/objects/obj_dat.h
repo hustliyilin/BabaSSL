@@ -2293,6 +2293,7 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"ZUC-128-EEA3", "zuc-128-eea3", NID_zuc_128_eea3, 8, &so[7802]},
     {"ZUC-128-EIA3", "zuc-128-eia3", NID_zuc_128_eia3, 8, &so[7810]},
     {"SSHKDF", "sshkdf", NID_sshkdf},
+    {"KBKDF", "kbkdf", NID_kbkdf},
     {"KRB5KDF", "krb5kdf", NID_krb5kdf},
     {"SSKDF", "sskdf", NID_sskdf},
 };
@@ -2462,6 +2463,7 @@ static const unsigned int sn_objs[NUM_SN] = {
      183,    /* "ISO-US" */
      645,    /* "ITU-T" */
      646,    /* "JOINT-ISO-ITU-T" */
+    1196,    /* "KBKDF" */
      773,    /* "KISA" */
     1197,    /* "KRB5KDF" */
     1063,    /* "KxANY" */
@@ -4296,6 +4298,7 @@ static const unsigned int ln_objs[NUM_LN] = {
      957,    /* "jurisdictionCountryName" */
      955,    /* "jurisdictionLocalityName" */
      956,    /* "jurisdictionStateOrProvinceName" */
+    1196,    /* "kbkdf" */
      150,    /* "keyBag" */
      773,    /* "kisa" */
     1197,    /* "krb5kdf" */
