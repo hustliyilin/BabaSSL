@@ -1203,4 +1203,5 @@ zuc		1202
 zuc_128_eea3		1203
 zuc_128_eia3		1204
 sshkdf		1205
+krb5kdf		1207
 sskdf		1208
