@@ -41,6 +41,8 @@ static const ERR_STRING_DATA KDF_str_functs[] = {
     {ERR_PACK(ERR_LIB_KDF, KDF_F_KDF_TLS1_PRF_DERIVE, 0),
      "kdf_tls1_prf_derive"},
     {ERR_PACK(ERR_LIB_KDF, KDF_F_KDF_TLS1_PRF_NEW, 0), "kdf_tls1_prf_new"},
+    {ERR_PACK(ERR_LIB_KDF, KDF_F_KRB5KDF, 0), "KRB5KDF"},
+    {ERR_PACK(ERR_LIB_KDF, KDF_F_KRB5KDF_DERIVE, 0), "krb5kdf_derive"},
     {ERR_PACK(ERR_LIB_KDF, KDF_F_PBKDF2_SET_MEMBUF, 0), "pbkdf2_set_membuf"},
     {ERR_PACK(ERR_LIB_KDF, KDF_F_PKEY_HKDF_CTRL_STR, 0), "pkey_hkdf_ctrl_str"},
     {ERR_PACK(ERR_LIB_KDF, KDF_F_PKEY_HKDF_DERIVE, 0), "pkey_hkdf_derive"},

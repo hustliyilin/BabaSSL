@@ -22,6 +22,11 @@ int ERR_load_KDF_strings(void);
  * KDF function codes.
  */
 # define KDF_F_HKDF_EXTRACT                               112
+# define KDF_F_KBKDF_CTRL                                 134
+# define KDF_F_KBKDF_CTRL_STR                             135
+# define KDF_F_KBKDF_DERIVE                               136
+# define KDF_F_KBKDF_NEW                                  137
+# define KDF_F_KDF_CIPHER2CTRL                            138
 # define KDF_F_KDF_HKDF_DERIVE                            113
 # define KDF_F_KDF_HKDF_NEW                               114
 # define KDF_F_KDF_HKDF_SIZE                              115
@@ -41,6 +46,8 @@ int ERR_load_KDF_strings(void);
 # define KDF_F_KDF_TLS1_PRF_CTRL_STR                      125
 # define KDF_F_KDF_TLS1_PRF_DERIVE                        126
 # define KDF_F_KDF_TLS1_PRF_NEW                           127
+# define KDF_F_KRB5KDF                                    139
+# define KDF_F_KRB5KDF_DERIVE                             140
 # define KDF_F_PBKDF2_SET_MEMBUF                          128
 # define KDF_F_PKEY_HKDF_CTRL_STR                         103
 # define KDF_F_PKEY_HKDF_DERIVE                           102
