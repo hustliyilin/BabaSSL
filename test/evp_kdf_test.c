@@ -229,6 +229,7 @@ err:
  * KBKDF test vectors from RFC 6803 (Camellia Encryption for Kerberos 5)
  * section 10.
  */
+#ifndef OPENSSL_NO_CAMELLIA
 static int test_kdf_kbkdf_6803_128(void)
 {
     int ret = 0, i;
@@ -267,7 +268,7 @@ static int test_kdf_kbkdf_6803_128(void)
             TEST_error("EVP_KDF_CTRL_SET_KB_MODE");
             goto err;
         }
-        if (EVP_KDF_ctrl(kctx, EVP_KDF_CTRL_SET_CIPHER, EVP_camellia_128_cbc()) <= 0) {
+	if (EVP_KDF_ctrl(kctx, EVP_KDF_CTRL_SET_CIPHER, EVP_camellia_128_cbc()) <= 0) {
             TEST_error("EVP_KDF_CTRL_SET_CIPHER");
             goto err;
         }
@@ -293,7 +294,9 @@ err:
     }
     return ret;
 }
+#endif
 
+#ifndef OPENSSL_NO_CAMELLIA
 static int test_kdf_kbkdf_6803_256(void)
 {
     int ret = 0, i;
@@ -369,6 +372,7 @@ err:
     }
     return ret;
 }
+#endif
 
 /* Two test vectors from RFC 8009 (AES Encryption with HMAC-SHA2 for Kerberos
  * 5) appendix A. */
@@ -566,8 +570,10 @@ static int test_kdf_ss_hash(void)
 
 int setup_tests(void)
 {
+#ifndef OPENSSL_NO_CAMELLIA
     ADD_TEST(test_kdf_kbkdf_6803_128);
     ADD_TEST(test_kdf_kbkdf_6803_256);
+#endif
     ADD_TEST(test_kdf_kbkdf_8009_prf1);
     ADD_TEST(test_kdf_kbkdf_8009_prf2);
     ADD_TEST(test_kdf_tls1_prf);

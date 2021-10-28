@@ -49,7 +49,9 @@ typedef struct {
     int mac_type;
     union {
         HMAC_CTX *hmac;
+#ifndef OPENSSL_NO_CMAC
         CMAC_CTX *cmac;
+#endif
     } m;
 } MAC_CTX;
 
@@ -86,8 +88,10 @@ static MAC_CTX *EVP_MAC_CTX_new(int mac_type)
         if ((ctx->m.hmac = HMAC_CTX_new()) == NULL)
             goto err;
     } else {
+#ifndef OPENSSL_NO_CMAC
         if ((ctx->m.cmac = CMAC_CTX_new()) == NULL)
             goto err;
+#endif
     }
     return ctx;
 
@@ -104,7 +108,9 @@ static void EVP_MAC_CTX_free(MAC_CTX *ctx)
     if (ctx->mac_type == EVP_KDF_KB_MAC_TYPE_HMAC)
         HMAC_CTX_free(ctx->m.hmac);
     else
+#ifndef OPENSSL_NO_CMAC
         CMAC_CTX_free(ctx->m.cmac);
+#endif
     OPENSSL_free(ctx);
 }
 
@@ -122,9 +128,11 @@ static MAC_CTX *EVP_MAC_CTX_dup(MAC_CTX *sctx)
             || HMAC_CTX_copy(ctx->m.hmac, sctx->m.hmac) <= 0)
             goto err;
     } else {
+#ifndef OPENSSL_NO_CMAC
         if ((ctx->m.cmac = CMAC_CTX_new()) == NULL
             || CMAC_CTX_copy(ctx->m.cmac, sctx->m.cmac) <= 0)
             goto err;
+#endif
     }
     return ctx;
 
@@ -144,6 +152,7 @@ static size_t EVP_MAC_size(MAC_CTX *ctx)
             return 0;
         return (size_t)EVP_MD_size(md);
     } else {
+#ifndef OPENSSL_NO_CMAC
         const EVP_CIPHER_CTX *cctx;
 
         if (ctx->m.cmac == NULL)
@@ -151,7 +160,10 @@ static size_t EVP_MAC_size(MAC_CTX *ctx)
         if ((cctx = CMAC_CTX_get0_cipher_ctx(ctx->m.cmac)) == NULL)
             return 0;
         return EVP_CIPHER_CTX_block_size(cctx);
+#endif
     }
+
+    return 0;
 }
 
 static int EVP_MAC_update(MAC_CTX *ctx, const unsigned char *data,
@@ -159,8 +171,12 @@ static int EVP_MAC_update(MAC_CTX *ctx, const unsigned char *data,
 {
     if (ctx->mac_type == EVP_KDF_KB_MAC_TYPE_HMAC)
         return HMAC_Update(ctx->m.hmac, data, datalen);
-    else
+    else {
+#ifndef OPENSSL_NO_CMAC
         return CMAC_Update(ctx->m.cmac, data, datalen);
+#endif
+    }
+    return 0;
 }
 
 static int EVP_MAC_final(MAC_CTX *ctx, unsigned char *out,
@@ -179,14 +195,17 @@ static int EVP_MAC_final(MAC_CTX *ctx, unsigned char *out,
             *outl = intsize;
         return ret;
     } else {
+#ifndef OPENSSL_NO_CMAC
         size_t size = outsize;
         int ret;
-
         ret = CMAC_Final(ctx->m.cmac, out, &size);
         if (outl != NULL)
             *outl = size;
         return ret;
+#endif
     }
+
+    return 0;
 }
 
 static int evp_mac_init(MAC_CTX *ctx, const EVP_MD *md,
@@ -197,10 +216,14 @@ static int evp_mac_init(MAC_CTX *ctx, const EVP_MD *md,
             return 0;
         return HMAC_Init_ex(ctx->m.hmac, key, (int)keylen, md, NULL);
     } else {
+#ifndef OPENSSL_NO_CMAC
         if (cipher == NULL)
             return 0;
         return CMAC_Init(ctx->m.cmac, key, keylen, cipher, NULL);
+#endif
     }
+
+    return 0;
 }
 
 static void kbkdf_reset(EVP_KDF_IMPL *ctx);
